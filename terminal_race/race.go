@@ -12,8 +12,8 @@ import (
 const racerRune rune = '🏎'
 
 func StartRace() {
-	racerOne := "🏎______________"
-	racerTwo := "🏎______________"
+	racerOne := "______________🏎"
+	racerTwo := "______________🏎"
 	oneFinished := false
 	twoFinished := false
 
@@ -33,24 +33,24 @@ func StartRace() {
 }
 
 func Update(racerLine *string, finished *bool) {
-	stringSize := len([]rune(*racerLine))
+	// stringSize := len([]rune(*racerLine))
 	for !*finished {
 		racerPos := strings.Index(*racerLine, string(racerRune))
-		if racerPos + 1 < stringSize - 1 {
+		if racerPos - 1 >= 0 {
 			runeSlice := []rune(*racerLine)
-			runeSlice[racerPos], runeSlice[racerPos + 1] = runeSlice[racerPos + 1], runeSlice[racerPos]
+			runeSlice[racerPos], runeSlice[racerPos - 1] = runeSlice[racerPos - 1], runeSlice[racerPos]
 			*racerLine = string(runeSlice)
 		} else {
 			*finished = true
 		}
-		time.Sleep(time.Duration(int(time.Millisecond) * rand.Intn(1000)))
+		time.Sleep(time.Duration(int(time.Millisecond) * rand.Intn(2000)))
 	}
 }
 
 func CheckRacer(racerOneWon bool) string {
 	if racerOneWon {
-		return "Racer one won!"
+		return "1 won!"
 	}
 
-	return "Racer two won!"
+	return "2 won!"
 }
