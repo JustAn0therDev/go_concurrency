@@ -9,17 +9,16 @@ import (
 	"time"
 )
 
-var racerRuneOne rune = '●'
-var racerRuneTwo rune = '☭'
+const racerRune rune = '🏎'
 
 func StartRace() {
-	racerOne := "●--------------"
-	racerTwo := "☭--------------"
+	racerOne := "🏎______________"
+	racerTwo := "🏎______________"
 	oneFinished := false
 	twoFinished := false
 
-	go Update(&racerOne, &racerRuneOne, &oneFinished)
-	go Update(&racerTwo, &racerRuneTwo, &twoFinished)
+	go Update(&racerOne, &oneFinished)
+	go Update(&racerTwo, &twoFinished)
 
 	for !oneFinished && !twoFinished {
 		fmt.Println(racerOne)
@@ -33,18 +32,16 @@ func StartRace() {
 	fmt.Println(CheckRacer(oneFinished))
 }
 
-func Update(racerLine *string, racerRune *rune, finished *bool) {
+func Update(racerLine *string, finished *bool) {
 	stringSize := len([]rune(*racerLine))
-	for rune((*racerLine)[stringSize]) != *racerRune {
-		racerPos := strings.Index(*racerLine, string(*racerRune))
+	for !*finished {
+		racerPos := strings.Index(*racerLine, string(racerRune))
 		if racerPos + 1 < stringSize - 1 {
 			runeSlice := []rune(*racerLine)
-			runeSlice[racerPos] = '-'
-			runeSlice[racerPos + 1] = rune(*racerRune)
+			runeSlice[racerPos], runeSlice[racerPos + 1] = runeSlice[racerPos + 1], runeSlice[racerPos]
 			*racerLine = string(runeSlice)
 		} else {
 			*finished = true
-			return
 		}
 		time.Sleep(time.Duration(int(time.Millisecond) * rand.Intn(1000)))
 	}
