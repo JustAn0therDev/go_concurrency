@@ -23,8 +23,9 @@ func StartRace() {
 	for !oneFinished && !twoFinished {
 		fmt.Println(racerOne)
 		fmt.Println(racerTwo)
-		time.Sleep(time.Second / 2)
+		time.Sleep(time.Millisecond)
 		cmd := exec.Command("cmd", "/c", "cls")
+		fmt.Fprintf(os.Stdout, "\x1b[?25l")
 		cmd.Stdout = os.Stdout
 		cmd.Run()
 	}
@@ -33,7 +34,6 @@ func StartRace() {
 }
 
 func Update(racerLine *string, finished *bool) {
-	// stringSize := len([]rune(*racerLine))
 	for !*finished {
 		racerPos := strings.Index(*racerLine, string(racerRune))
 		if racerPos - 1 >= 0 {
@@ -43,7 +43,7 @@ func Update(racerLine *string, finished *bool) {
 		} else {
 			*finished = true
 		}
-		time.Sleep(time.Duration(int(time.Millisecond) * rand.Intn(2000)))
+		time.Sleep(time.Duration(int(time.Millisecond) * rand.Intn(1000)))
 	}
 }
 
