@@ -3,8 +3,6 @@ package terminal_race
 import (
 	"fmt"
 	"math/rand"
-	"os"
-	"os/exec"
 	"strings"
 	"time"
 
@@ -31,10 +29,7 @@ func StartRace(numberOfRacers int) {
 	for !go_concurrency_util.AnyTrue(finished) {
 		printRacers(racers)
 		time.Sleep(time.Millisecond)
-		cmd := exec.Command("cmd", "/c", "cls")
-		fmt.Fprintf(os.Stdout, "\x1b[?25l")
-		cmd.Stdout = os.Stdout
-		cmd.Run()
+		go_concurrency_util.ClearScreenAndHideCursor()
 	}
 
 	fmt.Println(CheckRacer(finished))

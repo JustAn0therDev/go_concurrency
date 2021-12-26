@@ -6,13 +6,15 @@ import (
 	"strconv"
 
 	"github.com/JustAn0therDev/go_concurrency/go_concurrency_util"
+	"github.com/JustAn0therDev/go_concurrency/progress_bar"
 	"github.com/JustAn0therDev/go_concurrency/terminal_race"
 )
 
-var demos = []string{"Terminal race"}
+var demos = []string{"Terminal race", "Progress bar"}
 
 var demoCalls = map[int]func() {
-	0: StartTerminalRace,
+	0: startTerminalRace,
+	1: startProgressBar,
 }
 
 func main() {
@@ -29,7 +31,7 @@ func showAvailableDemos() {
 	fmt.Println("Avaliable demos: ")
 
 	for idx, demoName := range demos {
-		fmt.Printf("%d - %v", idx, demoName)
+		fmt.Printf("%d - %v\n", idx, demoName)
 	}
 
 	fmt.Println()
@@ -58,7 +60,7 @@ func getDemoIndex() (int, error) {
 	return int(demoIdx), nil
 }
 
-func StartTerminalRace() {
+func startTerminalRace() {
 	fmt.Print("Insert the number of cars you want to see in the race: ")
 	var args string
 
@@ -75,4 +77,8 @@ func StartTerminalRace() {
 	}
 
 	terminal_race.StartRace(int(numberOfRacers))
+}
+
+func startProgressBar() {
+	progress_bar.StartBar()
 }
