@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 
@@ -50,8 +51,8 @@ func getDemoIndex() (int, error) {
 		return 0, err
 	}
 
-	if demoIdx < 0 || int(demoIdx) > len(demos) {
-		panic("The demo index must be in the 'demos' range.")
+	if demoIdx < 0 || int(demoIdx) > len(demos) - 1 {
+		return 0, errors.New("the demo index must be in the 'demos' range")
 	}
 
 	return int(demoIdx), nil
