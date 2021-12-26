@@ -54,9 +54,9 @@ func CheckRacer(finished []bool) string {
 	for idx, racerFinished := range finished {
 		if racerFinished {
 			result = fmt.Sprintf("Racer %d won!", idx + 1)
+			break
 		}
 	}
-
 	return result
 }
 
