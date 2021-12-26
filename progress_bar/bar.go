@@ -2,6 +2,7 @@ package progress_bar
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 
 	"github.com/JustAn0therDev/go_concurrency/go_concurrency_util"
@@ -25,7 +26,7 @@ func StartBar() {
 func UpdateProgressBar(progressBar *string, done *bool) {
 	progressBarSize := len([]rune(*progressBar))
 	for i := 0; i < progressBarSize; i++ {
-		time.Sleep(time.Second / 2)
+		time.Sleep(time.Millisecond * time.Duration(rand.Intn(2000)))
 		pbRuneSlice := []rune(*progressBar)
 		pbRuneSlice[i] = loadedprogressBarRune
 		*progressBar = string(pbRuneSlice)
