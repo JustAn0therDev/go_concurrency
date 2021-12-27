@@ -21,7 +21,7 @@ func StartPassTheBat(competitors int) {
 
 	for !go_concurrency_util.AnyTrue(finished) {
 		printLines(lines)
-		time.Sleep(time.Second)
+		time.Sleep(time.Millisecond)
 		go_concurrency_util.ClearScreenAndHideCursor()
 	}
 
