@@ -17,6 +17,16 @@ var demoCalls = map[int]func() {
 	1: startProgressBar,
 }
 
+// TODO: next would be nice to have some sort of "passing the bat" by using channels;
+// much like runners passing a baton and only letting the next one run when the channel is
+// triggered with a value.
+// ____🏃____
+// ________🏃 🏃________
+// PASSED
+// ________🏃 ________🏃
+// ________🏃 _______🏃_
+// ________🏃 ______🏃__
+// ________🏃 _____🏃___
 func main() {
 	showAvailableDemos()
 
