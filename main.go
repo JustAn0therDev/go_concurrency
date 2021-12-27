@@ -6,18 +6,20 @@ import (
 	"strconv"
 
 	"github.com/JustAn0therDev/go_concurrency/go_concurrency_util"
+	"github.com/JustAn0therDev/go_concurrency/pass_the_bat"
 	"github.com/JustAn0therDev/go_concurrency/progress_bar"
 	"github.com/JustAn0therDev/go_concurrency/terminal_race"
 )
 
-var demos = []string{"Terminal race", "Progress bar"}
+var demos = []string{"Terminal race", "Progress bar", "Pass the bat"}
 
 var demoCalls = map[int]func() {
 	0: startTerminalRace,
 	1: startProgressBar,
+	2: startPassTheBat,
 }
 
-// TODO: next would be nice to have some sort of "passing the bat" by using channels;
+// TODO: next would be nice to have some sort of "passing the baton" by using channels;
 // much like runners passing a baton and only letting the next one run when the channel is
 // triggered with a value.
 // ____🏃____
@@ -91,4 +93,8 @@ func startTerminalRace() {
 
 func startProgressBar() {
 	progress_bar.StartBar()
+}
+
+func startPassTheBat() {
+	pass_the_bat.StartPassTheBat()
 }
