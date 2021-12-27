@@ -32,7 +32,7 @@ func StartRace(numberOfRacers int) {
 		go_concurrency_util.ClearScreenAndHideCursor()
 	}
 
-	fmt.Println(CheckRacer(finished))
+	printWinner(finished)
 }
 
 func Update(racerLine *string, finished []bool, racerIdx int) {
@@ -49,15 +49,12 @@ func Update(racerLine *string, finished []bool, racerIdx int) {
 	}
 }
 
-func CheckRacer(finished []bool) string {
-	var result string
+func printWinner(finished []bool) {
 	for idx, racerFinished := range finished {
 		if racerFinished {
-			result = fmt.Sprintf("Racer %d won!", idx + 1)
-			break
+			fmt.Printf("Racer %d won!\n", idx + 1)
 		}
 	}
-	return result
 }
 
 func printRacers(racers []string) {

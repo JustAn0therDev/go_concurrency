@@ -19,16 +19,6 @@ var demoCalls = map[int]func() {
 	2: startPassTheBat,
 }
 
-// TODO: next would be nice to have some sort of "passing the baton" by using channels;
-// much like runners passing a baton and only letting the next one run when the channel is
-// triggered with a value.
-// ____🏃____
-// ________🏃 🏃________
-// PASSED
-// ________🏃 ________🏃
-// ________🏃 _______🏃_
-// ________🏃 ______🏃__
-// ________🏃 _____🏃___
 func main() {
 	showAvailableDemos()
 
@@ -96,5 +86,20 @@ func startProgressBar() {
 }
 
 func startPassTheBat() {
-	pass_the_bat.StartPassTheBat()
+	fmt.Print("Insert the number of lines you want to see in the competition: ")
+	var args string
+
+	_, err := fmt.Scanln(&args)
+
+	go_concurrency_util.PanicIfErrNotNil(&err)
+
+	numberOfLines, err := strconv.ParseInt(args, 10, 32)
+
+	go_concurrency_util.PanicIfErrNotNil(&err)
+
+	if numberOfLines < 2 {
+		panic("The number of lines must be at least 2 (two).")
+	}
+
+	pass_the_bat.StartPassTheBat(int(numberOfLines))
 }
