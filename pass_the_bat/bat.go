@@ -10,18 +10,18 @@ import (
 )
 
 func StartPassTheBat(competitors int) {
-	var lines [][]string
-	var finished []bool
+	var lines [][]string = make([][]string, competitors)
+	var finished []bool = make([]bool, competitors)
 
 	for i := 0; i < competitors; i++ {
-		lines = append(lines, []string{"________🏃", "________🏃", "________🏃", "________🏃", "________🏃"})
-		finished = append(finished, false)
+		lines[i] = []string{"________🏃", "________🏃", "________🏃", "________🏃", "________🏃"}
+		finished[i] = false
 		go updateRunningMen(lines[i], &finished[i])
 	}
 
 	for !go_concurrency_util.AnyTrue(finished) {
 		printLines(lines)
-		time.Sleep(time.Millisecond)
+		time.Sleep(time.Microsecond)
 		go_concurrency_util.ClearScreenAndHideCursor()
 	}
 
@@ -30,10 +30,10 @@ func StartPassTheBat(competitors int) {
 
 func updateRunningMen(runningMen []string, done *bool) {
 	passingBatTo := make(chan int, 1)
-	var idx int = len(runningMen) - 1
-	for idx >= 0 {
-		go updateRunningManString(&runningMen[idx], idx, passingBatTo)
-		idx = <-passingBatTo
+	runningManIdx := len(runningMen) - 1
+	for runningManIdx >= 0 {
+		go updateRunningManString(&runningMen[runningManIdx], runningManIdx, passingBatTo)
+		runningManIdx = <-passingBatTo
 	}
 	*done = true
 }
@@ -41,7 +41,7 @@ func updateRunningMen(runningMen []string, done *bool) {
 func updateRunningManString(runningMan *string, idx int, passingBatTo chan int) {
 	stringSize := len([]rune(*runningMan)) - 1
 	for i := stringSize; i > 0; i-- {
-		time.Sleep(time.Millisecond * time.Duration(rand.Intn(1000)))
+		time.Sleep(time.Millisecond * time.Duration(rand.Intn(200)))
 		rmRuneSlice := []rune(*runningMan)
 		rmRuneSlice[i], rmRuneSlice[i - 1] = rmRuneSlice[i - 1], rmRuneSlice[i]
 		*runningMan = string(rmRuneSlice)

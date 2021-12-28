@@ -18,7 +18,6 @@ func StartBar() {
 
 	for !done {
 		fmt.Println(progressBar)
-		time.Sleep(time.Millisecond)
 		go_concurrency_util.ClearScreenAndHideCursor()
 	}
 }

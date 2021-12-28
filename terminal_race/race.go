@@ -22,13 +22,12 @@ func StartRace(numberOfRacers int) {
 
 	for i := 0; i < numberOfRacers; i++ {
 		racers[i] = racerLine
-		printRacers(racers)
 		go Update(&racers[i], finished, i)
 	}
 
 	for !go_concurrency_util.AnyTrue(finished) {
 		printRacers(racers)
-		time.Sleep(time.Millisecond)
+		time.Sleep(time.Microsecond)
 		go_concurrency_util.ClearScreenAndHideCursor()
 	}
 
@@ -45,14 +44,15 @@ func Update(racerLine *string, finished []bool, racerIdx int) {
 		} else {
 			finished[racerIdx] = true
 		}
-		time.Sleep(time.Duration(int(time.Millisecond) * rand.Intn(1000)))
+		time.Sleep(time.Duration(int(time.Millisecond) * rand.Intn(2000)))
 	}
 }
 
 func printWinner(finished []bool) {
-	for idx, racerFinished := range finished {
-		if racerFinished {
-			fmt.Printf("Racer %d won!\n", idx + 1)
+	for i := 0; i < len(finished); i++ {
+		if finished[i] {
+			fmt.Printf("Racer %d won!\n", i + 1)
+			break
 		}
 	}
 }
