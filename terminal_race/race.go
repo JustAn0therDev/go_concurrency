@@ -12,10 +12,6 @@ import (
 const racerRune rune = '🏎'
 
 func StartRace(numberOfRacers int) {
-	if numberOfRacers < 2 {
-		panic("The number of racers must be greater than two.")
-	}
-
 	racers := make([]string, numberOfRacers)
 	finished := make([]bool, numberOfRacers)
 	racerLine := "______________🏎"
