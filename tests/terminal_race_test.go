@@ -2,6 +2,7 @@ package tests
 
 import (
 	"testing"
+
 	"github.com/JustAn0therDev/go_concurrency/terminal_race"
 )
 

@@ -25,7 +25,7 @@ func StartBar() {
 func UpdateProgressBar(progressBar *string, done *bool) {
 	progressBarSize := len([]rune(*progressBar))
 	for i := 0; i < progressBarSize; i++ {
-		time.Sleep(time.Millisecond * time.Duration(rand.Intn(2000)))
+		time.Sleep(time.Millisecond * time.Duration(rand.Intn(1000)))
 		pbRuneSlice := []rune(*progressBar)
 		pbRuneSlice[i] = loadedprogressBarRune
 		*progressBar = string(pbRuneSlice)

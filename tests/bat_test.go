@@ -2,6 +2,7 @@ package tests
 
 import (
 	"testing"
+
 	"github.com/JustAn0therDev/go_concurrency/pass_the_bat"
 )
 
