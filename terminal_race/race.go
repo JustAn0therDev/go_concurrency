@@ -27,15 +27,15 @@ func StartRace(numberOfRacers int) {
 		go_concurrency_util.ClearScreenAndHideCursor()
 	}
 
-	fmt.Printf("Racer %d won!\n", GetWinnerIndex(finished) + 1)
+	fmt.Printf("Racer %d won!\n", GetWinnerIndex(finished)+1)
 }
 
 func Update(racerLine *string, finished []bool, racerIdx int) {
 	for !finished[racerIdx] {
 		racerPos := strings.Index(*racerLine, string(racerRune))
-		if racerPos - 1 >= 0 {
+		if racerPos-1 >= 0 {
 			runeSlice := []rune(*racerLine)
-			runeSlice[racerPos], runeSlice[racerPos - 1] = runeSlice[racerPos - 1], runeSlice[racerPos]
+			runeSlice[racerPos], runeSlice[racerPos-1] = runeSlice[racerPos-1], runeSlice[racerPos]
 			*racerLine = string(runeSlice)
 		} else {
 			finished[racerIdx] = true

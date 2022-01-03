@@ -4,10 +4,19 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"runtime"
 )
 
 func ClearScreenAndHideCursor() {
-	cmd := exec.Command("cmd", "/c", "cls")
+	runningOs := runtime.GOOS
+	var cmd *exec.Cmd
+	switch runningOs {
+	case "windows":
+		cmd = exec.Command("cmd", "/c", "cls")
+	default:
+		cmd = exec.Command("clear")
+	}
+
 	fmt.Fprintf(os.Stdout, "\x1b[?25l")
 	cmd.Stdout = os.Stdout
 	cmd.Run()
