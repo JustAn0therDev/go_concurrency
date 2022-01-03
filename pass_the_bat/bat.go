@@ -25,7 +25,7 @@ func StartPassTheBat(competitors int) {
 		go_concurrency_util.ClearScreenAndHideCursor()
 	}
 
-	printWinner(finished)
+	fmt.Printf("Line %d won!\n", GetWinnerIndex(finished) + 1)
 }
 
 func updateRunningMen(runningMen []string, done *bool) {
@@ -55,11 +55,11 @@ func printLines(lines [][]string) {
 	}
 }
 
-func printWinner(finished []bool) {
+func GetWinnerIndex(finished []bool) int {
 	for idx, finish := range finished {
 		if finish {
-			fmt.Printf("Line %d won!\n", idx + 1)
-			break
+			return idx
 		}
 	}
+	return -1
 }
