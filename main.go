@@ -15,7 +15,7 @@ var demos = []string{"Terminal race", "Progress bar", "Pass the bat"}
 
 var demoCalls = map[int]func() {
 	0: startTerminalRace,
-	1: startProgressBar,
+	1: progress_bar.StartBar,
 	2: startPassTheBat,
 }
 
@@ -79,10 +79,6 @@ func startTerminalRace() {
 	}
 
 	terminal_race.StartRace(int(numberOfRacers))
-}
-
-func startProgressBar() {
-	progress_bar.StartBar()
 }
 
 func startPassTheBat() {
