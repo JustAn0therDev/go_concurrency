@@ -8,9 +8,8 @@ import (
 )
 
 func ClearScreenAndHideCursor() {
-	runningOs := runtime.GOOS
 	var cmd *exec.Cmd
-	switch runningOs {
+	switch runtime.GOOS {
 	case "windows":
 		cmd = exec.Command("cmd", "/c", "cls")
 	default:
