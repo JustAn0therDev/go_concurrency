@@ -40,7 +40,7 @@ func Update(racerLine *string, finished []bool, racerIdx int) {
 		} else {
 			finished[racerIdx] = true
 		}
-		time.Sleep(time.Duration(int(time.Millisecond) * rand.Intn(2000)))
+		time.Sleep(time.Duration(int(time.Millisecond) * rand.Intn(700)))
 	}
 }
 
