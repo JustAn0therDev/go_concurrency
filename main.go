@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/JustAn0therDev/LogGo"
 	"github.com/JustAn0therDev/go_concurrency/go_concurrency_util"
 	"github.com/JustAn0therDev/go_concurrency/pass_the_bat"
 	"github.com/JustAn0therDev/go_concurrency/progress_bar"
@@ -27,6 +28,8 @@ func main() {
 	go_concurrency_util.PanicIfErrNotNil(&err)
 
 	demoCalls[demoIdx]()
+	logMessage := fmt.Sprintf("Ran: %s", demos[demoIdx])
+	LogGo.LogInfo(&logMessage)
 }
 
 func showAvailableDemos() {
